@@ -6,7 +6,7 @@ from os import urandom
 
 def random_tweet(account):
 	# https://docs.python.org/2/library/codecs.html#python-specific-encodings
-	status = urandom(140).decode('raw_unicode_escape')
+	status = urandom(140).decode('utf-8', errors='ignore')
 	tweet = account.update_status(status=status)
 	# Gotta like this tweet, after all, we wrote it
 	account.create_favorite(id=tweet['id'])
