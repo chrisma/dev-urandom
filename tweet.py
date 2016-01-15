@@ -3,6 +3,7 @@
 from twython import Twython
 from credentials import *
 from os import urandom
+from random import randint
 
 def random_tweet(account):
 	# https://docs.python.org/2/library/codecs.html
@@ -14,4 +15,5 @@ def random_tweet(account):
 
 if __name__ == '__main__':
 	account = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-	random_tweet(account)
+	if randint(1,150) == 1:
+		random_tweet(account)
