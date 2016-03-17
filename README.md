@@ -7,3 +7,11 @@ Either a silly idea or satire.
 Runs on [OpenShift](https://www.openshift.com/).
 
 ![Screenshot](screenshot.png)
+
+## Run the Thing
+* Clone/Fork the repo
+* Register an app at [https://dev.twitter.com/apps](https://dev.twitter.com/apps)
+* Copy your tokens to `credentials.py`
+* Ignore changes to `credentials.py`, so you don't commit your keys:
+  `git update-index --assume-unchanged credentials.py`
+* Run `python tweet.py`
