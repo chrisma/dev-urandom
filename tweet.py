@@ -18,5 +18,5 @@ def random_tweet(account):
 
 if __name__ == '__main__':
 	account = Twython(APP_KEY, APP_SECRET, OAUTH_TOKEN, OAUTH_TOKEN_SECRET)
-	# if randint(1,150) == 1:
-	random_tweet(account)
+	if randint(1,150) == 1:
+		random_tweet(account)
