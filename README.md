@@ -9,7 +9,7 @@ Never out of things to say, due to the source of its inspiration.
 ## Run it
 * Clone/Fork the repo
 * Register an app at [https://developer.twitter.com/en/apps](https://developer.twitter.com/en/apps)
-* Copy your tokens to `credentials.py`
+* Copy your generated API tokens to `credentials.py`
 * Ignore changes to `credentials.py`, so you don't commit your keys:
   `git update-index --assume-unchanged credentials.py`
 * Run `python tweet.py`
