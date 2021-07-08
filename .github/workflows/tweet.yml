@@ -1,0 +1,35 @@
+name: devurandom twitter Bot
+
+on:
+  schedule:
+    # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
+    # * is a special character in YAML so quote the string
+    - cron: '*/10 * * * *' # Runs Bot every 10 minutes
+
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        # https://docs.github.com/en/actions/guides/building-and-testing-python#using-a-specific-python-version
+      - name: Set up Python 3.x
+        uses: actions/setup-python@v2
+        with:
+          # Semantic version range syntax or exact version of a Python version
+          python-version: '3.x'
+      - name: Display Python version
+        run: python -c "import sys; print(sys.version)"
+        # https://docs.github.com/en/actions/guides/building-and-testing-python#installing-dependencies
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run Twitter Bot
+        run: python tweet.py
+        # https://docs.github.com/en/actions/reference/encrypted-secrets#using-encrypted-secrets-in-a-workflow
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          API_SECRET_KEY: ${{ secrets.API_SECRET_KEY }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
