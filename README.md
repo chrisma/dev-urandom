@@ -8,7 +8,7 @@ Never out of things to say, due to the source of its inspiration.
 
 ## Run it
 * Clone/Fork the repo
-* Register an app at [https://dev.twitter.com/apps](https://dev.twitter.com/apps)
+* Register an app at [https://developer.twitter.com/en/apps](https://developer.twitter.com/en/apps)
 * Copy your tokens to `credentials.py`
 * Ignore changes to `credentials.py`, so you don't commit your keys:
   `git update-index --assume-unchanged credentials.py`
