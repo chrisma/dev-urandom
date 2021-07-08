@@ -2,9 +2,9 @@ name: devurandom Twitter Bot
 
 on:
   schedule:
-    # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#onschedule
+    # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule
     # * is a special character in YAML so quote the string
-    - cron: '*/10 * * * *' # Runs Bot every 10 minutes
+    - cron: '0,10,20,30,40,50 * * * *' # Runs Bot every 10 minutes
   # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#manual-events
   workflow_dispatch:
 
