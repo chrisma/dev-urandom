@@ -54,7 +54,3 @@ coverage.xml
 docs/_build/
 
 # PyBuilder
-target/
-
-# venv
-devurandom
