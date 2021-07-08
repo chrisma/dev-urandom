@@ -5,6 +5,7 @@ from credentials import *
 from encodings_list import *
 from random import randint
 import os
+import sys
 import random
 import logging
 
@@ -15,10 +16,10 @@ def generate_content():
 	text = ''
 	while len(text) < TWEET_LENGTH:
 		encoding = random.choice(ENCODINGS_LIST)
-		logging.debug(f"Using encoding: '{encoding}'")
+		logging.info(f"Using encoding: '{encoding}'")
 		char = os.urandom(64).decode(encoding, errors='ignore')
 		text += char[0]
-	logging.debug(f"Status length: {len(text)}")
+	logging.info(f"Status length: {len(text)}")
 	return text
 
 def tweet(account, status):
@@ -27,8 +28,14 @@ def tweet(account, status):
 	account.create_favorite(id=tweet['id'])
 
 if __name__ == '__main__':
-	logging.basicConfig(level=logging.DEBUG)
-	logging.debug('Started!')
+	logging.basicConfig(level=logging.INFO)
+	logging.info('Started!')
+
+	if randint(1,4) != 1:
+		logging.info('Not tweeting this time.')
+		sys.exit()
+
+	logging.info('Attempting to tweet')
 	# Get credentials from credentialy.py, fall back to env variables (used in GH Actions workflow)
 	account = Twython(
 		os.environ.get('API_KEY') or API_KEY,
@@ -36,11 +43,8 @@ if __name__ == '__main__':
 		os.environ.get('ACCESS_TOKEN') or ACCESS_TOKEN,
 		os.environ.get('ACCESS_TOKEN_SECRET') or ACCESS_TOKEN_SECRET)
 	info = account.verify_credentials()
-	logging.debug(f"Logged in as '{info['name']}' (@{info['screen_name']}). Tweets: {info['statuses_count']}, Followers: {info['followers_count']}")
+	logging.info(f"Logged in as '{info['name']}' (@{info['screen_name']}). Tweets: {info['statuses_count']}, Followers: {info['followers_count']}")
 
-	if randint(1,4) == 1:
-		status = generate_content()
-		logging.debug(status)
-		tweet(account, status)
-	else:
-		logging.debug('Not tweeting this time.')
+	status = generate_content()
+	logging.info(status)
+	tweet(account, status)
