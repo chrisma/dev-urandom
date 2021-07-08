@@ -31,10 +31,10 @@ if __name__ == '__main__':
 	logging.debug('Started!')
 	# Get credentials from credentialy.py, fall back to env variables (used in GH Actions workflow)
 	account = Twython(
-		API_KEY or os.environ['API_KEY'],
-		API_SECRET_KEY or os.environ['API_SECRET_KEY'],
-		ACCESS_TOKEN or os.environ['ACCESS_TOKEN'],
-		ACCESS_TOKEN_SECRET or os.environ['ACCESS_TOKEN_SECRET'])
+		os.environ.get('API_KEY') or API_KEY,
+		os.environ.get('API_SECRET_KEY') or API_SECRET_KEY,
+		os.environ.get('ACCESS_TOKEN') or ACCESS_TOKEN,
+		os.environ.get('ACCESS_TOKEN_SECRET') or ACCESS_TOKEN_SECRET)
 	info = account.verify_credentials()
 	logging.debug(f"Logged in as '{info['name']}' (@{info['screen_name']}). Tweets: {info['statuses_count']}, Followers: {info['followers_count']}")
 
