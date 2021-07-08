@@ -4,7 +4,7 @@ on:
   schedule:
     # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#schedule
     # * is a special character in YAML so quote the string
-    - cron: '0/5 * * * *' # Runs Bot every 5 minutes
+    - cron: '0,5,10,15,20,25,30,35,40,45,50,55 * * * *' # Runs Bot every 5 minutes
   # https://docs.github.com/en/actions/reference/events-that-trigger-workflows#manual-events
   workflow_dispatch:
 
