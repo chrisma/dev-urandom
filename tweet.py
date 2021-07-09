@@ -47,9 +47,9 @@ if __name__ == '__main__':
 	logging.basicConfig(level=logging.INFO)
 	logging.info('Started!')
 
-	# if randint(1,4) != 1:
-	# 	logging.info('Not tweeting this time.')
-	# 	sys.exit()
+	if randint(1,4) != 1:
+		logging.info('Not tweeting this time.')
+		sys.exit()
 
 	logging.info('Attempting to tweet')
 	account, account_info = login()
