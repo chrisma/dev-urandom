@@ -3,7 +3,7 @@
 from twython import Twython
 from twython.exceptions import TwythonError
 from credentials import *
-from encodings_list import *
+from encodings_list import ENCODINGS_LIST
 from random import randint
 import os
 import sys
