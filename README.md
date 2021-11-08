@@ -8,9 +8,9 @@ Never out of things to say, due to the source of its inspiration.
 Powered by GitHub Actions.
 
 ## Run it
-* Clone/Fork the repo
-* Register an app at [https://developer.twitter.com/en/apps](https://developer.twitter.com/en/apps)
-* Copy your generated API tokens to `credentials.py`, store them as environment variables, or store them as [GitHub repository secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) when using the GitHub Actions workflow.
+* Clone/fork the repository
+* Register a Twitter app at [https://developer.twitter.com/en/apps](https://developer.twitter.com/en/apps)
+* Copy the generated API tokens to `credentials.py`, store them as environment variables, or store them as [GitHub repository secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) when using the GitHub Actions workflow.
 * Ignore changes to `credentials.py`, so you don't commit your keys:
   `git update-index --assume-unchanged credentials.py`
 * Run `python tweet.py` to run locally, or see the scheduled GitHub Actions runs.
