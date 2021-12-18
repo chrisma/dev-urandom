@@ -9,6 +9,7 @@ import os
 import sys
 import random
 import logging
+from PIL import Image
 
 TWEET_LENGTH = 140
 
@@ -23,7 +24,7 @@ def login():
 	logging.info(f"Logged in as '{info['name']}' (@{info['screen_name']}). Tweets: {info['statuses_count']}, Followers: {info['followers_count']}")
 	return account, info
 
-def generate_content():
+def generate_text():
 	# 'utf-8'? pfff...
 	text = ''
 	while len(text) < TWEET_LENGTH:
@@ -33,8 +34,28 @@ def generate_content():
 	logging.info(text)
 	return text
 
-def send_tweet(account, status):
-	tweet = account.update_status(status=status)
+def generate_image(width=256, height=256, path='image.png'):
+	image = Image.new('RGB', (width, height))
+	for x in range(width):
+		for y in range(height):
+			r = random.randint(0, 255)
+			g = random.randint(0, 255)
+			b = random.randint(0, 255)
+			image.putpixel((x, y), (r, g, b))
+	image.save(path)
+
+	return path
+
+def send_tweet(account, status_text, status_image_path=None):
+	media_id = None
+	if status_image_path:
+		with open(status_image_path, 'rb') as image:
+			response = account.upload_media(media=image)
+			media_id = response['media_id']
+	tweet = account.update_status(
+		status=status_text,
+		media_ids=[media_id] if media_id else []
+	)
 	try:
 		# Gotta like this tweet. After all, we wrote it
 		account.create_favorite(id=tweet['id'])
@@ -53,6 +74,12 @@ if __name__ == '__main__':
 
 	logging.info('Attempting to tweet')
 	account, account_info = login()
-	text = generate_content()
-	tweet = send_tweet(account, text)
+	if randint(1,10) != 1:
+		text = generate_text()
+		tweet = send_tweet(account, text, None)
+	else:
+		logging.info('Photo time!')
+		image = generate_image()
+		tweet = send_tweet(account, None, image)
+
 	logging.info(f"Posted: https://twitter.com/{account_info['screen_name']}/status/{tweet['id']}")
