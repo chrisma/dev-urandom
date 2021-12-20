@@ -1,1 +1,2 @@
 twython>=3.3.0
+pillow>=8.4.0
