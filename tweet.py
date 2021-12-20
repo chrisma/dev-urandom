@@ -25,9 +25,9 @@ def login():
 	return account, info
 
 def generate_text():
-	# 'utf-8'? pfff...
 	text = ''
 	while len(text) < TWEET_LENGTH:
+		# 'utf-8'? pfff...
 		encoding = random.choice(ENCODINGS_LIST)
 		char = os.urandom(64).decode(encoding, errors='ignore')
 		text += char[0]
@@ -43,15 +43,17 @@ def generate_image(width=256, height=256, path='image.png'):
 			b = random.randint(0, 255)
 			image.putpixel((x, y), (r, g, b))
 	image.save(path)
-
 	return path
 
 def send_tweet(account, status_text, status_image_path=None):
 	media_id = None
 	if status_image_path:
 		with open(status_image_path, 'rb') as image:
+			# https://twython.readthedocs.io/en/latest/usage/advanced_usage.html#updating-status-with-image
 			response = account.upload_media(media=image)
 			media_id = response['media_id']
+			logging.info(f"Uploaded image response: {response}")
+	
 	tweet = account.update_status(
 		status=status_text,
 		media_ids=[media_id] if media_id else []
@@ -68,6 +70,7 @@ if __name__ == '__main__':
 	logging.basicConfig(level=logging.INFO)
 	logging.info('Started!')
 
+	# randint(a, b): Return a random integer N such that a <= N <= b
 	if randint(1,4) != 1:
 		logging.info('Not tweeting this time.')
 		sys.exit()

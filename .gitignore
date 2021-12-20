@@ -53,4 +53,5 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 
-# PyBuilder
+# tmp random image
+image.png
